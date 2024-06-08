@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-data-source-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: data-source
+  template:
+    metadata:
+      labels:
+        app: data-source
+    spec:
+      containers:
+      - name: data-source
+        image: {{ .Values.datasource.image }}
+        ports:
+        - containerPort: {{ .Values.datasource.port }}
+        resources:
+          requests:
+            memory: "{{ .Values.datasource.memoryRequest }}"
+          limits:
+            memory: "{{ .Values.datasource.memoryLimit }}"
+        env:
+          - name: ORACLE_SID
+            value: "ORCLCDB"
+          - name: ORACLE_PDB
+            value: "ORCLPDB1"
+          - name: ORACLE_PWD
+            value: "Oracle_123"

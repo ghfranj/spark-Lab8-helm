@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-model-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: model
+  template:
+    metadata:
+      labels:
+        app: model
+    spec:
+      containers:
+      - name: model
+        image: {{ .Values.model.image }}
+        ports:
+        - containerPort: {{ .Values.model.port }}
+        resources:
+          requests:
+            memory: "{{ .Values.model.memoryRequest }}"
+          limits:
+            memory: "{{ .Values.model.memoryLimit }}"
+        env:
+        - name: DATAMART_HOST
+          value: "{{ .Release.Name }}-datamart"

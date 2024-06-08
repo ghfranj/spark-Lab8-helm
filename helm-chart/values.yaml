@@ -1,0 +1,16 @@
+# my-chart/values.yaml
+model:
+  image: ghfranjabour/model-service:latest
+  port: 4040
+  memoryRequest: "1Gi"
+  memoryLimit: "3Gi"
+datamart:
+  image: ghfranjabour/datamart-service:v2
+  port: 9000
+  memoryRequest: "1Gi"
+  memoryLimit: "3Gi"
+datasource:
+  image: ghfranjabour/oracle-enterprise:21.3.0.0
+  port: 1521
+  memoryRequest: "1Gi"
+  memoryLimit: "3Gi"
