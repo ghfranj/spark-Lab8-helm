@@ -1,4 +1,3 @@
-# my-chart/values.yaml
 model:
   image: ghfranjabour/model-service:latest
   port: 4040
